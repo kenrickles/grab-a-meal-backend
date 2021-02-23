@@ -1,6 +1,6 @@
-export default function initUserModel(sequelize, DataTypes) {
+export default function initActivityModel(sequelize, DataTypes) {
   return sequelize.define(
-    'user',
+    'activity',
     {
       id: {
         allowNull: false,
@@ -11,23 +11,34 @@ export default function initUserModel(sequelize, DataTypes) {
       name: {
         type: DataTypes.STRING,
       },
-      photo: {
+      description: {
         type: DataTypes.STRING,
       },
-      dateOfBirth: {
+      dateTime: {
         type: DataTypes.DATE,
       },
-      email: {
+      totalNumOfParticipants: {
+        type: DataTypes.INTEGER,
+      },
+      location: {
         type: DataTypes.STRING,
       },
-      password: {
-        type: DataTypes.STRING,
+      isExisting: {
+        type: DataTypes.BOOLEAN,
       },
-      gender: {
-        type: DataTypes.STRING,
+      categoryId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'categories',
+          key: 'id',
+        },
       },
-      country: {
-        type: DataTypes.STRING,
+      creatorId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
       },
       createdAt: {
         allowNull: false,

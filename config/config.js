@@ -1,6 +1,6 @@
 module.exports = {
   development: {
-    username: 'kenrick',
+    username: process.env.USER,
     password: null,
     database: 'grab_a_meal_development',
     host: '127.0.0.1',

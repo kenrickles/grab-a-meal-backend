@@ -1,7 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
-
+import cors from 'cors';
 import bindRoutes from './routes.mjs';
 
 // Initialise Express instance
@@ -16,6 +16,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 // Expose the files stored in the public folder
 app.use(express.static('public'));
+// Set CORS headers
+app.use(cors());
 
 // Bind route definitions to the Express application
 bindRoutes(app);

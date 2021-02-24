@@ -21,6 +21,9 @@ export default function initActivitiesUserModel(sequelize, DataTypes) {
           model: 'users',
           key: 'id',
         },
+        is_active: {
+          type: DataTypes.BOOLEAN,
+        },
       },
       createdAt: {
         allowNull: false,

@@ -81,7 +81,7 @@ export default function initUsersController(db) {
 
     try {
       const {
-        email, password, name, gender, countryId, dateOfBirth,
+        email, password, name, gender, dateOfBirth,
       } = req.body;
       const hashedPassword = getHash(password);
 
@@ -91,8 +91,8 @@ export default function initUsersController(db) {
         password: hashedPassword,
         name,
         gender,
-        countryId,
         dateOfBirth,
+        photo: '/images/profile-photos/anonymous-person.jpg',
       });
 
       // generate a hashed userId

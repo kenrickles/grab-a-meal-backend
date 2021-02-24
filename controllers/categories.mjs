@@ -1,4 +1,4 @@
-export default function categories(db) {
+export default function initCategoriesController(db) {
   const getCategories = async (req, res) => {
     // set object to store data to be sent to response
     const data = {};

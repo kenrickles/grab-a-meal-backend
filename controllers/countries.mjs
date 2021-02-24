@@ -1,4 +1,4 @@
-export default function countries(db) {
+export default function initCountriesController(db) {
   const getCountries = async (req, res) => {
     // set object to store data to be sent to response
     const data = {};

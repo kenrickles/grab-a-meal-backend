@@ -26,7 +26,7 @@ export default function initUserModel(sequelize, DataTypes) {
       gender: {
         type: DataTypes.STRING,
       },
-      country: {
+      countryId: {
         type: DataTypes.STRING,
       },
       createdAt: {

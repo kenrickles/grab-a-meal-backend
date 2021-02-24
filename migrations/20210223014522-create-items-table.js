@@ -30,6 +30,7 @@ module.exports = {
       email: {
         unique: true,
         type: Sequelize.STRING,
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
@@ -132,6 +133,9 @@ module.exports = {
           model: 'users',
           key: 'id',
         },
+      },
+      is_active: {
+        type: Sequelize.BOOLEAN,
       },
       created_at: {
         allowNull: false,

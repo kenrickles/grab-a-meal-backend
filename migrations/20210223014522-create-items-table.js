@@ -28,6 +28,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
       email: {
+        unique: true,
         type: Sequelize.STRING,
         unique: true,
       },

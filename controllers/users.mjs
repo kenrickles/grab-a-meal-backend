@@ -4,7 +4,7 @@ const { getHash } = require('../utilities/auth.js');
 
 const { UniqueConstraintError, ValidationError, DatabaseError } = pkg;
 
-export default function users(db) {
+export default function initUsersController(db) {
   const login = async (req, res) => {
     console.log('post request to login came in');
 

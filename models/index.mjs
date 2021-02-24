@@ -73,12 +73,12 @@ db.Message.belongsTo(db.User);
 db.Activity.hasMany(db.Message);
 db.Message.belongsTo(db.Activity);
 
-// User to Activity_user
+// User to ActivitiesUser
 db.User.hasMany(db.ActivitiesUser);
-db.ActivityUser.belongsTo(db.User);
+db.ActivitiesUser.belongsTo(db.User);
 
-// Activity to Activity_user
-db.Activity.hasMany(db.ActivityUser);
-db.ActivityUser.belongsTo(db.Activity);
+// Activity to ActivitiesUser
+db.Activity.hasMany(db.ActivitiesUser);
+db.ActivitiesUser.belongsTo(db.Activity);
 
 export default db;

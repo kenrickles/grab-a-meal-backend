@@ -1,6 +1,6 @@
 import pkg from 'sequelize';
 
-const { getHash } = require('../utilities/auth.js');
+import { getHash } from '../utilities/auth.js';
 
 const { UniqueConstraintError, ValidationError, DatabaseError } = pkg;
 

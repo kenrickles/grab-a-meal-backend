@@ -13,4 +13,5 @@ export default function bindRoutes(app) {
   // define your route matchers here using app
   app.post('/login', UsersController.login);
   app.get('/activities', ActivitiesController.index);
+  app.post('/createActivities', ActivitiesController.createActivity);
 }

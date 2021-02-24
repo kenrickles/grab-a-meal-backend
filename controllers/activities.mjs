@@ -8,10 +8,31 @@ export default function initActivityController(db) {
       })
       .catch((error) => console.log(error));
   };
+  const createActivity = async (request, response) => {
+    try {
+      const newActivity = await db.Activity.create({
+        name: request.body.name,
+        description: request.body.description,
+        dateTime: new Date(request.body.startDate),
+        totalNumOfParticipants: request.body.totalNumOfParticipants,
+        location: request.body.location,
+        is_existing: true,
+        categoryId: request.body.categoryId,
+        creatorId: request.body.userId,
+        created_at: new Date(),
+        updated_at: new Date(),
+      });
+      console.log(newActivity);
+    }
+    catch (error) {
+      console.log(error);
+      response.status(500).send(error);
+    }
+  };
 
   // return all methods we define in an object
   // refer to the routes file above to see this used
   return {
-    index,
+    index, createActivity,
   };
 }

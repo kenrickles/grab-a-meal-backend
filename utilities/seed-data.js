@@ -109,6 +109,18 @@ const activityList = [
     created_at: new Date(),
     updated_at: new Date(),
   },
+  {
+    name: 'Dinner at Hai Di Lao',
+    description: 'Steamboat and hopefully a love boat!',
+    date_time: '2015-03-2',
+    total_num_of_participants: 4,
+    location: 'Singapore',
+    is_existing: true,
+    category_id: 4,
+    creator_id: 2,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
 ];
 
 // export the seed data as a module

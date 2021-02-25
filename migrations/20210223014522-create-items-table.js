@@ -1,16 +1,5 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('countries', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
-      name: {
-        type: Sequelize.STRING,
-      },
-    });
     await queryInterface.createTable('users', {
       id: {
         allowNull: false,
@@ -36,13 +25,6 @@ module.exports = {
       },
       gender: {
         type: Sequelize.STRING,
-      },
-      country_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'countries',
-          key: 'id',
-        },
       },
       created_at: {
         allowNull: false,
@@ -186,6 +168,5 @@ module.exports = {
     await queryInterface.dropTable('activities');
     await queryInterface.dropTable('categories');
     await queryInterface.dropTable('users');
-    await queryInterface.dropTable('countries');
   },
 };

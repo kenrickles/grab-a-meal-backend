@@ -3,7 +3,6 @@ import url from 'url';
 import allConfig from '../config/config.js';
 
 import initUserModel from './user.mjs';
-import initCountryModel from './country.mjs';
 import initCategoryModel from './category.mjs';
 import initActivityModel from './activity.mjs';
 import initMessageModel from './message.mjs';
@@ -43,14 +42,10 @@ db.Sequelize = Sequelize;
 // models are always singular
 db.User = initUserModel(sequelize, Sequelize.DataTypes);
 db.Category = initCategoryModel(sequelize, Sequelize.DataTypes);
-db.Country = initCountryModel(sequelize, Sequelize.DataTypes);
+
 db.Activity = initActivityModel(sequelize, Sequelize.DataTypes);
 db.ActivitiesUser = initActivitiesUserModel(sequelize, Sequelize.DataTypes);
 db.Message = initMessageModel(sequelize, Sequelize.DataTypes);
-
-// Countries has many users Relationship
-db.User.belongsTo(db.Country);
-db.Country.hasMany(db.User);
 
 // Many to many relationship for User and Activity
 db.Activity.belongsToMany(db.User, { through: db.ActivitiesUser });

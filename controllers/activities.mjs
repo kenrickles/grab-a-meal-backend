@@ -12,20 +12,23 @@ export default function initActivityController(db) {
 
   const create = async (request, response) => {
     const { user } = request;
+
     try {
       const newActivity = await db.Activity.create({
         name: request.body.name,
         description: request.body.description,
-        dateTime: new Date(request.body.startDate),
+        dateTime: request.body.dateTime,
         totalNumOfParticipants: request.body.totalNumOfParticipants,
         location: request.body.location,
-        is_existing: true,
+        isExisting: true,
         categoryId: request.body.categoryId,
         creatorId: user.id,
         created_at: new Date(),
         updated_at: new Date(),
       });
       console.log(newActivity);
+
+      response.send({ newActivity });
     }
     catch (error) {
       console.log(error);

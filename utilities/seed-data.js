@@ -1,17 +1,4 @@
-const { getNames } = require('country-list');
 const { getHash } = require('./auth.js');
-
-// array of objects containing country names.
-// object template is { name: <countryname> }
-const countriesList = [];
-const countriesNames = getNames();
-
-countriesNames.sort();
-for (let i = 0; i < countriesNames.length; i += 1) {
-  countriesList.push({
-    name: countriesNames[i],
-  });
-}
 
 // array of objects containing category names.
 // object template is { name: <categoryname> }
@@ -34,7 +21,6 @@ const usersList = [
     email: 'alvin@gmail.com',
     password: getHash('alvin'),
     gender: 'male',
-    country_id: 200,
     created_at: new Date(),
     updated_at: new Date(),
   },
@@ -45,7 +31,6 @@ const usersList = [
     email: 'ken@gmail.com',
     password: getHash('ken'),
     gender: 'male',
-    country_id: 200,
     created_at: new Date(),
     updated_at: new Date(),
   },
@@ -56,7 +41,6 @@ const usersList = [
     email: 'veena@gmail.com',
     password: getHash('veena'),
     gender: 'female',
-    country_id: 200,
     created_at: new Date(),
     updated_at: new Date(),
   },
@@ -67,7 +51,6 @@ const usersList = [
     email: 'jitcorn@gmail.com',
     password: getHash('jitcorn'),
     gender: 'male',
-    country_id: 200,
     created_at: new Date(),
     updated_at: new Date(),
   },
@@ -78,7 +61,6 @@ const usersList = [
     email: 'akira@gmail.com',
     password: getHash('akira'),
     gender: 'male',
-    country_id: 200,
     created_at: new Date(),
     updated_at: new Date(),
   },
@@ -89,7 +71,6 @@ const usersList = [
     email: 'jeremy@gmail.com',
     password: getHash('jeremy'),
     gender: 'male',
-    country_id: 200,
     created_at: new Date(),
     updated_at: new Date(),
   },
@@ -125,7 +106,6 @@ const activityList = [
 
 // export the seed data as a module
 module.exports = {
-  countriesList,
   categoriesList,
   usersList,
   activityList,

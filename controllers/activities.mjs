@@ -13,6 +13,14 @@ export default function initActivityController(db) {
   const create = async (request, response) => {
     const { user } = request;
 
+    // if there is no logged in user, send a 403 request forbidden response
+    if (user === null) {
+      console.log('inside forbidden response');
+      response.sendStatus(403);
+      // return so code below will not run
+      return;
+    }
+
     try {
       const newActivity = await db.Activity.create({
         name: request.body.name,

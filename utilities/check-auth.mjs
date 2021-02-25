@@ -1,4 +1,4 @@
-import getHash from './auth.js';
+import { getHash } from './auth.js';
 /**
  * set the cookie checking middleware callback
  * and supply logged-in user data to subsequent middleware

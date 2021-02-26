@@ -1,15 +1,24 @@
 // db is an argument to this function so
+
 // that we can make db queries inside
 export default function initActivityController(db) {
   const index = (request, response) => {
-    db.Activity.findAll()
+    db.Activity.findAll({
+      include: [
+        { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
+        db.ActivitiesUser,
+      ],
+    })
       .then((activities) => {
         console.log(request.user);
         response.send({ activities });
       })
       .catch((error) => console.log(error));
   };
-
+  // const findOne = (request, response) => {
+  //   db.Activity.findOne()
+  //   .then((activities))
+  // };
   const create = async (request, response) => {
     const { user } = request;
 

@@ -55,9 +55,44 @@ export default function initActivityController(db) {
     }
   };
 
+  const join = async (request, response) => {
+    const { user } = request;
+    const activityId = request.params.id;
+
+    // if there is no logged in user, send a 403 request forbidden response
+    if (user === null) {
+      console.log('inside forbidden response');
+      response.sendStatus(403);
+      // return so code below will not run
+      return;
+    }
+
+    try {
+      await db.ActivitiesUser.create({
+        activityId,
+        userId: user.id,
+      });
+
+      // get the updated activities from the database
+      const activities = await db.Activity.findAll({
+        include: [
+          { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
+          db.ActivitiesUser,
+        ],
+      });
+
+      // send the updated activities to the response
+      response.send({ activities });
+    }
+    catch (error) {
+      console.log(error);
+      response.status(500).send(error);
+    }
+  };
+
   // return all methods we define in an object
   // refer to the routes file above to see this used
   return {
-    index, create,
+    index, create, join,
   };
 }

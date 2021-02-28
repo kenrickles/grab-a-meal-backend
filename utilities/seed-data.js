@@ -102,6 +102,80 @@ const activityList = [
     created_at: new Date(),
     updated_at: new Date(),
   },
+  {
+    name: 'Supper Time',
+    description: 'Quick Supper Session',
+    date_time: '2015-03-2',
+    total_num_of_participants: 4,
+    location: 'Singapore',
+    is_existing: true,
+    category_id: 5,
+    creator_id: 1,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+  {
+    name: 'Breakfast at Tiffanys',
+    description: 'For all the people who enjoy early morning breakfast',
+    date_time: '2015-03-2',
+    total_num_of_participants: 4,
+    location: 'Singapore',
+    is_existing: true,
+    category_id: 4,
+    creator_id: 2,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+  {
+    name: 'Fireside chat',
+    description: 'Ask an expat anything over a meal',
+    date_time: '2015-03-2',
+    total_num_of_participants: 4,
+    location: 'Singapore',
+    is_existing: true,
+    category_id: 4,
+    creator_id: 2,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+];
+
+const activityUsersList = [
+  {
+    activity_id: 1,
+    user_id: 1,
+    is_active: true,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+  {
+    activity_id: 2,
+    user_id: 2,
+    is_active: true,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+  {
+    activity_id: 3,
+    user_id: 1,
+    is_active: true,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+  {
+    activity_id: 4,
+    user_id: 1,
+    is_active: true,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+  {
+    activity_id: 5,
+    user_id: 1,
+    is_active: true,
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
 ];
 
 // export the seed data as a module
@@ -109,4 +183,5 @@ module.exports = {
   categoriesList,
   usersList,
   activityList,
+  activityUsersList,
 };

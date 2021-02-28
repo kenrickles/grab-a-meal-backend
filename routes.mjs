@@ -17,7 +17,7 @@ export default function bindRoutes(app) {
   app.post('/register', UsersController.register);
   app.get('/activities', checkAuth, ActivitiesController.index);
   app.post('/activities', checkAuth, ActivitiesController.create);
-  app.get('/activities/:id/join', checkAuth, ActivitiesController.join);
   app.put('/activities/:id', checkAuth, ActivitiesController.update);
+  app.post('/activities/:id/participants', checkAuth, ActivitiesController.join);
   app.put('/activities/:id/participants', checkAuth, ActivitiesController.leave);
 }

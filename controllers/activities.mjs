@@ -144,7 +144,13 @@ export default function initActivityController(db) {
       const activities = await db.Activity.findAll({
         include: [
           { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
-          db.ActivitiesUser,
+          {
+            model: db.User,
+            attributes: ['name', 'photo'],
+            through: {
+              where: { isActive: true },
+            },
+          },
         ],
       });
 
@@ -193,7 +199,13 @@ export default function initActivityController(db) {
       const activities = await db.Activity.findAll({
         include: [
           { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
-          db.ActivitiesUser,
+          {
+            model: db.User,
+            attributes: ['name', 'photo'],
+            through: {
+              where: { isActive: true },
+            },
+          },
         ],
       });
 

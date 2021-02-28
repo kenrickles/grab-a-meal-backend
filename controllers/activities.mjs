@@ -90,9 +90,63 @@ export default function initActivityController(db) {
     }
   };
 
+  const update = async (request, response) => {
+    console.log('request to edit an activity ');
+
+    // store the user's data (or null if no user is logged in) gotten from the
+    // previous middleware, checkAuth
+    const { user } = request;
+
+    // if there is no logged in user, send a 403 request forbidden response
+    if (user === null) {
+      console.log('inside forbidden response');
+      response.sendStatus(403);
+      // return so code below will not run
+      return;
+    }
+
+    try {
+      // get the activity id from the url
+      const activityId = request.params.id;
+      // data from the request to be updated in the database
+      const editedActivity = request.body;
+
+      // update the database with the edited activity
+      await db.Activity.update(
+        {
+          name: editedActivity.name,
+          description: editedActivity.description,
+          dateTime: editedActivity.dateTime,
+          totalNumOfParticipants: editedActivity.totalNumOfParticipants,
+          location: editedActivity.location,
+          categoryId: editedActivity.categoryId,
+        },
+        {
+          where: {
+            id: activityId,
+          },
+        },
+      );
+
+      // get the updated activities from the database
+      const activities = await db.Activity.findAll({
+        include: [
+          { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
+          db.ActivitiesUser,
+        ],
+      });
+
+      response.send({ activities });
+    } catch (error) {
+      console.log(error);
+      // send error to browser
+      response.status(500).send(error);
+    }
+  };
+
   // return all methods we define in an object
   // refer to the routes file above to see this used
   return {
-    index, create, join,
+    index, create, join, update,
   };
 }

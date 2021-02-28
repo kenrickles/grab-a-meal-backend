@@ -15,10 +15,7 @@ export default function initActivityController(db) {
       })
       .catch((error) => console.log(error));
   };
-  // const findOne = (request, response) => {
-  //   db.Activity.findOne()
-  //   .then((activities))
-  // };
+
   const create = async (request, response) => {
     const { user } = request;
 
@@ -44,6 +41,11 @@ export default function initActivityController(db) {
         updated_at: new Date(),
       });
       console.log(newActivity);
+
+      await db.ActivitiesUser.create({
+        activityId: newActivity.id,
+        userId: user.id,
+      });
 
       response.send({ newActivity });
     }

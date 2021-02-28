@@ -24,6 +24,7 @@ export default function initActivitiesUserModel(sequelize, DataTypes) {
       },
       isActive: {
         type: DataTypes.BOOLEAN,
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,

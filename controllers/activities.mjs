@@ -8,7 +8,7 @@ export default function initActivityController(db) {
         { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
         {
           model: db.User,
-          attributes: ['name', 'photo'],
+          attributes: ['id', 'name', 'photo'],
           through: {
             where: { isActive: true },
           },
@@ -40,6 +40,8 @@ export default function initActivityController(db) {
         dateTime: request.body.dateTime,
         totalNumOfParticipants: request.body.totalNumOfParticipants,
         location: request.body.location,
+        usualPrice: request.body.usualPrice,
+        discountedPrice: request.body.discountedPrice,
         isExisting: true,
         categoryId: request.body.categoryId,
         creatorId: user.id,
@@ -85,7 +87,7 @@ export default function initActivityController(db) {
           { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
           {
             model: db.User,
-            attributes: ['name', 'photo'],
+            attributes: ['id', 'name', 'photo'],
             through: {
               where: { isActive: true },
             },

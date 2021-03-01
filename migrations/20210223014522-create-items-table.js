@@ -68,6 +68,12 @@ module.exports = {
       location: {
         type: Sequelize.STRING,
       },
+      undiscounted_price: {
+        type: Sequelize.DECIMAL(10, 2),
+      },
+      discounted_price: {
+        type: Sequelize.DECIMAL(10, 2),
+      },
       is_existing: {
         type: Sequelize.BOOLEAN,
       },

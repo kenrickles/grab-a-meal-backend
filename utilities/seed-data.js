@@ -4,7 +4,7 @@ const { getHash } = require('./auth.js');
 // object template is { name: <categoryname> }
 const categoriesList = [];
 
-const categoriesNames = ['Breakfast', 'Coffee', 'Lunch', 'Dinner', 'Supper', 'Budget', 'Fancy', 'Movie', 'Sports', 'Hike', 'Karaoke', 'Clubbing', 'Others'];
+const categoriesNames = ['Breakfast', 'Coffee', 'Lunch', 'Dinner', 'Supper', 'Buffet', 'Food', 'Fancy', 'Movie', 'Sports', 'Hike', 'Karaoke', 'Clubbing', 'Others'];
 
 for (let i = 0; i < categoriesNames.length; i += 1) {
   categoriesList.push({

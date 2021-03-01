@@ -23,7 +23,7 @@ export default function initActivityModel(sequelize, DataTypes) {
       location: {
         type: DataTypes.STRING,
       },
-      undiscounted_price: {
+      usual_price: {
         type: DataTypes.DECIMAL(10, 2),
       },
       discounted_price: {

@@ -68,7 +68,7 @@ module.exports = {
       location: {
         type: Sequelize.STRING,
       },
-      undiscounted_price: {
+      usual_price: {
         type: Sequelize.DECIMAL(10, 2),
       },
       discounted_price: {

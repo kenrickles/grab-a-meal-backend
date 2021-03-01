@@ -8,7 +8,7 @@ export default function initActivityController(db) {
         { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
         {
           model: db.User,
-          attributes: ['name', 'photo'],
+          attributes: ['id', 'name', 'photo'],
           through: {
             where: { isActive: true },
           },
@@ -87,7 +87,7 @@ export default function initActivityController(db) {
           { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
           {
             model: db.User,
-            attributes: ['name', 'photo'],
+            attributes: ['id', 'name', 'photo'],
             through: {
               where: { isActive: true },
             },

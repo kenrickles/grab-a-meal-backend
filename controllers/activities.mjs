@@ -48,14 +48,31 @@ export default function initActivityController(db) {
         created_at: new Date(),
         updated_at: new Date(),
       });
-      console.log(newActivity);
 
       await db.ActivitiesUser.create({
         activityId: newActivity.id,
         userId: user.id,
       });
 
-      response.send({ newActivity });
+      // get the updated activities from the database
+      const activities = await db.Activity.findAll({
+        include: [
+          { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
+          {
+            model: db.User,
+            attributes: ['id', 'name', 'photo'],
+            through: {
+              where: { isActive: true },
+            },
+          },
+        ],
+      });
+
+      // find the newly created activity details from the activities array
+      const newActivityDetails = activities.find((el) => el.id === newActivity.id);
+      console.log('newActivityDetails', newActivityDetails);
+
+      response.send({ newActivityDetails, activities });
     }
     catch (error) {
       console.log(error);

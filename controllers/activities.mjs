@@ -3,6 +3,15 @@
 // that we can make db queries inside
 export default function initActivityController(db) {
   const index = (request, response) => {
+    const { user } = request;
+
+    // if there is no logged in user, send a 403 request forbidden response
+    if (user === null) {
+      console.log('inside forbidden response');
+      response.sendStatus(403);
+      // return so code below will not run
+      return;
+    }
     db.Activity.findAll({
       include: [
         { model: db.User, as: 'creator', attributes: ['name', 'photo'] },

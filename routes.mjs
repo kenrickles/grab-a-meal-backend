@@ -20,4 +20,5 @@ export default function bindRoutes(app) {
   app.post('/activities/:id/participants', checkAuth, ActivitiesController.join);
   app.put('/activities/:id', checkAuth, ActivitiesController.update);
   app.delete('/activities/:id/participants', checkAuth, ActivitiesController.leave);
+  app.delete('/activities/:id', checkAuth, ActivitiesController.deleteActivity);
 }

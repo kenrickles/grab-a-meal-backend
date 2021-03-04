@@ -13,6 +13,9 @@ export default function initActivityController(db) {
       return;
     }
     db.Activity.findAll({
+      where: {
+        isExisting: true,
+      },
       include: [
         { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
         {
@@ -65,6 +68,9 @@ export default function initActivityController(db) {
 
       // get the updated activities from the database
       const activities = await db.Activity.findAll({
+        where: {
+          isExisting: true,
+        },
         include: [
           { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
           {
@@ -109,6 +115,9 @@ export default function initActivityController(db) {
 
       // get the updated activities from the database
       const activities = await db.Activity.findAll({
+        where: {
+          isExisting: true,
+        },
         include: [
           { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
           {
@@ -170,6 +179,9 @@ export default function initActivityController(db) {
 
       // get the updated activities from the database
       const activities = await db.Activity.findAll({
+        where: {
+          isExisting: true,
+        },
         include: [
           { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
           {
@@ -193,9 +205,112 @@ export default function initActivityController(db) {
     }
   };
 
+  // update database that a user is no longer a participant of an activity
+  const leave = async (request, response) => {
+    const { user } = request;
+    const activityId = request.params.id;
+
+    // if there is no logged in user, send a 403 request forbidden response
+    if (user === null) {
+      console.log('inside forbidden response');
+      response.sendStatus(403);
+      // return so code below will not run
+      return;
+    }
+
+    try {
+      await db.ActivitiesUser.update(
+        {
+          isActive: false,
+        },
+        {
+          where: {
+            activityId,
+            userId: user.id,
+          },
+        },
+      );
+
+      // get the updated activities from the database
+      const activities = await db.Activity.findAll({
+        where: {
+          isExisting: true,
+        },
+        include: [
+          { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
+          {
+            model: db.User,
+            attributes: ['id', 'name', 'photo'],
+            through: {
+              where: { isActive: true },
+            },
+          },
+        ],
+      });
+
+      // send the updated activities to the response
+      response.send({ activities });
+    }
+    catch (error) {
+      console.log(error);
+      response.status(500).send(error);
+    }
+  };
+
+  // update database that an activity is cancelled
+  const deleteActivity = async (request, response) => {
+    const { user } = request;
+    const activityId = request.params.id;
+
+    // if there is no logged in user, send a 403 request forbidden response
+    if (user === null) {
+      console.log('inside forbidden response');
+      response.sendStatus(403);
+      // return so code below will not run
+      return;
+    }
+
+    try {
+      await db.Activity.update(
+        {
+          isExisting: false,
+        },
+        {
+          where: {
+            id: activityId,
+          },
+        },
+      );
+
+      // get the updated activities from the database
+      const activities = await db.Activity.findAll({
+        where: {
+          isExisting: true,
+        },
+        include: [
+          { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
+          {
+            model: db.User,
+            attributes: ['id', 'name', 'photo'],
+            through: {
+              where: { isActive: true },
+            },
+          },
+        ],
+      });
+
+      // send the updated activities to the response
+      response.send({ activities });
+    }
+    catch (error) {
+      console.log(error);
+      response.status(500).send(error);
+    }
+  };
+
   // return all methods we define in an object
   // refer to the routes file above to see this used
   return {
-    index, create, join, update,
+    index, create, join, update, leave, deleteActivity,
   };
 }

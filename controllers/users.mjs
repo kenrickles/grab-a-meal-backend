@@ -104,8 +104,16 @@ export default function initUsersController(db) {
       res.cookie('userId', user.id);
       res.cookie('loggedInHash', loggedInHash);
 
+      // set object to store responses
+      const responseData = {};
+
+      // add key to inform front end that a user has loggedIn successfully
+      responseData.loggedIn = true;
+      responseData.userId = user.id;
+      responseData.userName = user.name;
+
       // send back a response with the newly created user's id
-      res.send({ userId: user.id });
+      res.send(responseData);
     } catch (error) {
       if (error instanceof UniqueConstraintError) {
         // email is not unique

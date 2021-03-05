@@ -43,7 +43,9 @@ export default function initUsersController(db) {
         res.cookie('loggedInHash', loggedInHash);
 
         // add key to inform front end that a user has loggedIn successfully
+        responseData.loggedIn = true;
         responseData.userId = user.id;
+        responseData.userName = user.name;
 
         // respond with data
         res.send(responseData);

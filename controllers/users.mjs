@@ -43,9 +43,9 @@ export default function initUsersController(db) {
         res.cookie('loggedInHash', loggedInHash);
 
         // add key to inform front end that a user has loggedIn successfully
-        responseData.loggedIn = true;
+        responseData.userId = user.id;
 
-        // redirect to home page
+        // respond with data
         res.send(responseData);
       }
     } catch (error) {
@@ -102,8 +102,8 @@ export default function initUsersController(db) {
       res.cookie('userId', user.id);
       res.cookie('loggedInHash', loggedInHash);
 
-      // send back a response that the user has been created
-      res.send({ createdUser: true });
+      // send back a response with the newly created user's id
+      res.send({ userId: user.id });
     } catch (error) {
       if (error instanceof UniqueConstraintError) {
         // email is not unique

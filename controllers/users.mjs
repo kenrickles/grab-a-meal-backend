@@ -44,6 +44,8 @@ export default function initUsersController(db) {
 
         // add key to inform front end that a user has loggedIn successfully
         responseData.loggedIn = true;
+        responseData.userId = user.id;
+        responseData.userName = user.name;
 
         // redirect to home page
         res.send(responseData);

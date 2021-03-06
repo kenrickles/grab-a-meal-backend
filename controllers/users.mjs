@@ -42,11 +42,12 @@ export default function initUsersController(db) {
         res.cookie('userId', user.id, {
           secure: true,
           sameSite: true,
+          maxAge: 5184000000,
         });
         res.cookie('loggedInHash', loggedInHash, {
           secure: true,
-          sameSite:
-          true,
+          sameSite: true,
+          maxAge: 5184000000,
         });
 
         // add key to inform front end that a user has loggedIn successfully

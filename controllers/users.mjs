@@ -5,6 +5,7 @@ import { getHash } from '../utilities/auth.js';
 const { UniqueConstraintError, ValidationError, DatabaseError } = pkg;
 
 export default function initUsersController(db) {
+  // run this when a login request is sent to the server
   const login = async (req, res) => {
     console.log('post request to login came in');
 
@@ -50,27 +51,6 @@ export default function initUsersController(db) {
         // respond with data
         res.send(responseData);
       }
-    } catch (error) {
-      console.log(error);
-      // send error to browser
-      res.status(500).send(error);
-    }
-  };
-
-  const getRegistrationPageData = async (req, res) => {
-    console.log('render a registration page');
-
-    // set object to store array of countries data from the database
-    const templateData = {};
-
-    try {
-      // find array of countries data
-      const countries = await db.Country.findAll();
-
-      templateData.countries = countries;
-
-      // send the countries data to response
-      res.send(templateData);
     } catch (error) {
       console.log(error);
       // send error to browser
@@ -151,6 +131,6 @@ export default function initUsersController(db) {
   };
 
   return {
-    login, getRegistrationPageData, register, logout,
+    login, register, logout,
   };
 }

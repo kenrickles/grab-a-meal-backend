@@ -13,6 +13,7 @@ export default function bindRoutes(app) {
   const ActivitiesController = initActivityController(db);
 
   // define your route matchers here using app
+  // when a HTTP post request is made to 'HOSTNAME/login', run the UsersController.login function
   app.post('/login', UsersController.login);
   app.post('/register', UsersController.register);
   app.delete('/logout', UsersController.logout);

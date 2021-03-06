@@ -2,12 +2,14 @@ import { Sequelize } from 'sequelize';
 import url from 'url';
 import allConfig from '../config/config.js';
 
+// import the functions to initialise the models. Each function represents 1 table in the database.
 import initUserModel from './user.mjs';
 import initCategoryModel from './category.mjs';
 import initActivityModel from './activity.mjs';
 import initMessageModel from './message.mjs';
 import initActivitiesUserModel from './activitiesUser.mjs';
 
+// if there is no environment variable called NODE_ENV, use 'development'
 const env = process.env.NODE_ENV || 'development';
 
 const config = allConfig[env];
@@ -36,10 +38,11 @@ if (env === 'production') {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-// add your model definitions to db here
+// add model definitions to db
+// models are always singular
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-// models are always singular
+
 db.User = initUserModel(sequelize, Sequelize.DataTypes);
 db.Category = initCategoryModel(sequelize, Sequelize.DataTypes);
 

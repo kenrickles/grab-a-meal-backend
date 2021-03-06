@@ -2,6 +2,7 @@
 
 // that we can make db queries inside
 export default function initActivityController(db) {
+  // finds all activities in the database
   const index = (request, response) => {
     const { user } = request;
 
@@ -34,6 +35,7 @@ export default function initActivityController(db) {
       .catch((error) => console.log(error));
   };
 
+  // creates a new activity in the database
   const create = async (request, response) => {
     const { user } = request;
 
@@ -46,6 +48,7 @@ export default function initActivityController(db) {
     }
 
     try {
+      // try to create a new activity in the database
       const newActivity = await db.Activity.create({
         name: request.body.name,
         description: request.body.description,
@@ -61,6 +64,7 @@ export default function initActivityController(db) {
         updated_at: new Date(),
       });
 
+      // create a new activities_user entry in the database
       await db.ActivitiesUser.create({
         activityId: newActivity.id,
         userId: user.id,
@@ -87,6 +91,7 @@ export default function initActivityController(db) {
       const newActivityDetails = activities.find((el) => el.id === newActivity.id);
       console.log('newActivityDetails', newActivityDetails);
 
+      // send the data back to response
       response.send({ newActivityDetails, activities });
     }
     catch (error) {
@@ -95,6 +100,7 @@ export default function initActivityController(db) {
     }
   };
 
+  // creates a new activities_user entry in the database
   const join = async (request, response) => {
     const { user } = request;
     const activityId = request.params.id;
@@ -108,6 +114,7 @@ export default function initActivityController(db) {
     }
 
     try {
+      // try to create a new activities_user entry in the database
       await db.ActivitiesUser.create({
         activityId,
         userId: user.id,
@@ -309,7 +316,7 @@ export default function initActivityController(db) {
   };
 
   // return all methods we define in an object
-  // refer to the routes file above to see this used
+  // refer to the routes.mjs file to see this used
   return {
     index, create, join, update, leave, deleteActivity,
   };

@@ -41,11 +41,11 @@ export default function initUsersController(db) {
         // set cookies with the userId and hashed userId
         res.cookie('userId', user.id, {
           secure: true,
-          sameSite: 'none',
+          sameSite: 'lax',
         });
         res.cookie('loggedInHash', loggedInHash, {
           secure: true,
-          sameSite: 'none',
+          sameSite: 'lax',
         });
 
         // add key to inform front end that a user has loggedIn successfully

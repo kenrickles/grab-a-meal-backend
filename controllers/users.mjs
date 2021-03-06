@@ -41,7 +41,7 @@ export default function initUsersController(db) {
 
         // set cookies with the userId and hashed userId
         res.cookie('userId', user.id, { sameSite: NONE });
-        res.cookie('loggedInHash', loggedInHash, { sameSite: NONE });
+        res.cookie('loggedInHash', loggedInHash, { sameSite: false });
 
         // add key to inform front end that a user has loggedIn successfully
         responseData.loggedIn = true;

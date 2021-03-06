@@ -16,8 +16,9 @@ app.use(cors({
   // i.e. in the Access-Control-Allow-Origin header in the response
   origin: true,
 }));
+app.set('trust proxy', 1)
 // Bind cookie parser middleware to parse cookies in requests
-app.use(cookieParser());
+  . app.use(cookieParser());
 // Bind Express middleware to parse request bodies for POST requests
 app.use(express.urlencoded({ extended: false }));
 // Bind Express middleware to parse JSON request bodies

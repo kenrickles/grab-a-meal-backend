@@ -90,12 +90,12 @@ export default function initUsersController(db) {
       // set cookies with the userId and hashed userId
       res.cookie('userId', user.id, {
         secure: true,
-        sameSite: 'none',
+        sameSite: true,
       });
       res.cookie('loggedInHash', loggedInHash, {
         secure: true,
         sameSite:
-          'none',
+          true,
       });
 
       // set object to store responses

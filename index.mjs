@@ -8,9 +8,12 @@ import bindRoutes from './routes.mjs';
 const app = express();
 // Set the Express view engine to expect EJS templates
 app.set('view engine', 'ejs');
-// Set CORS headers
+// Set CORS headers to allow AJAX requests from remote origins
 app.use(cors({
+  // credentials true allow cookies to be sent over CORS
   credentials: true,
+  // reflect the requested origin name in the CORS response
+  // i.e. in the Access-Control-Allow-Origin header in the response
   origin: true,
 }));
 // Bind cookie parser middleware to parse cookies in requests

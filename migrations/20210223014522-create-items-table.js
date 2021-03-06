@@ -1,5 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    // define the tables and field names for sequelize to create them in the database
     await queryInterface.createTable('users', {
       id: {
         allowNull: false,

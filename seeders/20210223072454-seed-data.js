@@ -2,11 +2,13 @@ const seedData = require('../utilities/seed-data');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    // get the seed data from the imported seed data file
     const {
       categoriesList, usersList, activityList, activityUsersList,
     } = seedData;
 
     try {
+      // insert the seed data into their respective tables
       await queryInterface.bulkInsert('categories', categoriesList);
       await queryInterface.bulkInsert('users', usersList);
       await queryInterface.bulkInsert('activities', activityList);

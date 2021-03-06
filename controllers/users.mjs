@@ -41,12 +41,12 @@ export default function initUsersController(db) {
         // set cookies with the userId and hashed userId
         res.cookie('userId', user.id, {
           secure: true,
-          sameSite: true,
+          sameSite: false,
           maxAge: 5184000000,
         });
         res.cookie('loggedInHash', loggedInHash, {
           secure: true,
-          sameSite: true,
+          sameSite: false,
           maxAge: 5184000000,
         });
 

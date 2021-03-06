@@ -2,8 +2,25 @@
 
 // that we can make db queries inside
 export default function initActivityController(db) {
+  // find all existing activities in the database
+  const findExistingActivities = () => db.Activity.findAll({
+    where: {
+      isExisting: true,
+    },
+    include: [
+      { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
+      {
+        model: db.User,
+        attributes: ['id', 'name', 'photo'],
+        through: {
+          where: { isActive: true },
+        },
+      },
+    ],
+  });
+
   // finds all activities in the database
-  const index = (request, response) => {
+  const index = async (request, response) => {
     const { user } = request;
 
     // if there is no logged in user, send a 403 request forbidden response
@@ -13,26 +30,15 @@ export default function initActivityController(db) {
       // return so code below will not run
       return;
     }
-    db.Activity.findAll({
-      where: {
-        isExisting: true,
-      },
-      include: [
-        { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
-        {
-          model: db.User,
-          attributes: ['id', 'name', 'photo'],
-          through: {
-            where: { isActive: true },
-          },
-        },
-      ],
-    })
-      .then((activities) => {
-        console.log(request.user);
-        response.send({ activities });
-      })
-      .catch((error) => console.log(error));
+
+    try {
+      const activities = await findExistingActivities();
+
+      response.send({ activities });
+    } catch (error) {
+      console.log(error);
+      response.status(500).send(error);
+    }
   };
 
   // creates a new activity in the database
@@ -71,21 +77,7 @@ export default function initActivityController(db) {
       });
 
       // get the updated activities from the database
-      const activities = await db.Activity.findAll({
-        where: {
-          isExisting: true,
-        },
-        include: [
-          { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
-          {
-            model: db.User,
-            attributes: ['id', 'name', 'photo'],
-            through: {
-              where: { isActive: true },
-            },
-          },
-        ],
-      });
+      const activities = await findExistingActivities();
 
       // find the newly created activity details from the activities array
       const newActivityDetails = activities.find((el) => el.id === newActivity.id);
@@ -121,21 +113,7 @@ export default function initActivityController(db) {
       });
 
       // get the updated activities from the database
-      const activities = await db.Activity.findAll({
-        where: {
-          isExisting: true,
-        },
-        include: [
-          { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
-          {
-            model: db.User,
-            attributes: ['id', 'name', 'photo'],
-            through: {
-              where: { isActive: true },
-            },
-          },
-        ],
-      });
+      const activities = await findExistingActivities();
 
       // send the updated activities to the response
       response.send({ activities });
@@ -185,21 +163,7 @@ export default function initActivityController(db) {
       );
 
       // get the updated activities from the database
-      const activities = await db.Activity.findAll({
-        where: {
-          isExisting: true,
-        },
-        include: [
-          { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
-          {
-            model: db.User,
-            attributes: ['id', 'name', 'photo'],
-            through: {
-              where: { isActive: true },
-            },
-          },
-        ],
-      });
+      const activities = await findExistingActivities();
 
       // find the updated activity details from the activities array
       const updatedActivity = activities.find((el) => el.id === Number(activityId));
@@ -239,21 +203,7 @@ export default function initActivityController(db) {
       );
 
       // get the updated activities from the database
-      const activities = await db.Activity.findAll({
-        where: {
-          isExisting: true,
-        },
-        include: [
-          { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
-          {
-            model: db.User,
-            attributes: ['id', 'name', 'photo'],
-            through: {
-              where: { isActive: true },
-            },
-          },
-        ],
-      });
+      const activities = await findExistingActivities();
 
       // send the updated activities to the response
       response.send({ activities });
@@ -290,21 +240,7 @@ export default function initActivityController(db) {
       );
 
       // get the updated activities from the database
-      const activities = await db.Activity.findAll({
-        where: {
-          isExisting: true,
-        },
-        include: [
-          { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
-          {
-            model: db.User,
-            attributes: ['id', 'name', 'photo'],
-            through: {
-              where: { isActive: true },
-            },
-          },
-        ],
-      });
+      const activities = await findExistingActivities();
 
       // send the updated activities to the response
       response.send({ activities });

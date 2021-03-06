@@ -1,5 +1,4 @@
-import pkg, { NONE } from 'sequelize';
-
+import pkg from 'sequelize';
 import { getHash } from '../utilities/auth.js';
 
 const { UniqueConstraintError, ValidationError, DatabaseError } = pkg;
@@ -40,8 +39,8 @@ export default function initUsersController(db) {
         const loggedInHash = getHash(user.id);
 
         // set cookies with the userId and hashed userId
-        res.cookie('userId', user.id);
-        res.cookie('loggedInHash', loggedInHash);
+        res.cookie('userId', user.id, { secure: true });
+        res.cookie('loggedInHash', loggedInHash, { secure: true });
 
         // add key to inform front end that a user has loggedIn successfully
         responseData.loggedIn = true;

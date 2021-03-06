@@ -43,11 +43,13 @@ export default function initUsersController(db) {
           path: '/',
           secure: true,
           sameSite: 'none',
+          httpOnly: true,
         });
         res.cookie('loggedInHash', loggedInHash, {
           path: '/',
           secure: true,
           sameSite: 'none',
+          httpOnly: true,
         });
 
         // add key to inform front end that a user has loggedIn successfully

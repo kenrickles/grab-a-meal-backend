@@ -40,10 +40,10 @@ export default function initUsersController(db) {
 
         // set cookies with the userId and hashed userId
         res.cookie('userId', user.id, {
-          domain: 'hangout.casa',
+          domain: 'hangoutsonline.xyz',
         });
         res.cookie('loggedInHash', loggedInHash, {
-          domain: 'hangout.casa',
+          domain: 'hangoutsonline.xyz',
         });
 
         // add key to inform front end that a user has loggedIn successfully
@@ -86,10 +86,10 @@ export default function initUsersController(db) {
       // set cookies with the userId and hashed userId
       // set cookies with the userId and hashed userId
       res.cookie('userId', user.id, {
-        domain: 'hangout.casa',
+        domain: 'hangoutsonline.xyz',
       });
       res.cookie('loggedInHash', loggedInHash, {
-        domain: 'hangout.casa',
+        domain: 'hangoutsonline.xyz',
       });
 
       // set object to store responses
@@ -132,11 +132,11 @@ export default function initUsersController(db) {
   const logout = async (req, res) => {
     console.log('request to logout came in');
     res.clearCookie('userId', {
-      domain: 'hangout.casa',
+      domain: 'hangoutsonline.xyz',
     });
 
     res.clearCookie('loggedInHash', {
-      domain: 'hangout.casa',
+      domain: 'hangoutsonline.xyz',
     });
 
     res.send({ loggedOut: true });

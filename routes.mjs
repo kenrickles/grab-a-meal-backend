@@ -14,6 +14,8 @@ export default function bindRoutes(app) {
 
   // define your route matchers here using app
   // when a HTTP post request is made to 'HOSTNAME/login', run the UsersController.login function
+  app.get('home');
+  app.get('messages');
   app.post('/login', UsersController.login);
   app.post('/register', UsersController.register);
   app.delete('/logout', UsersController.logout);

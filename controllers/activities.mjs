@@ -4,15 +4,20 @@
 export default function initActivityController(db) {
   // find all existing activities in the database
   const findExistingActivities = () => db.Activity.findAll({
+    // only retrieve activities where the isExisting field is true
     where: {
       isExisting: true,
     },
     include: [
+      // retrieve the name and photo of the activity's creator from the users table
       { model: db.User, as: 'creator', attributes: ['name', 'photo'] },
+      // retrieve the participants' id, name and photo from the users table
       {
         model: db.User,
         attributes: ['id', 'name', 'photo'],
         through: {
+          // filter participants where the isActive field is true in the activities_users table
+          // i.e. only retrieve participants that have not left the activity
           where: { isActive: true },
         },
       },
@@ -190,6 +195,8 @@ export default function initActivityController(db) {
     }
 
     try {
+      // update the isActive field in the activities_user table for the entry
+      // corresponding to activityId and userId
       await db.ActivitiesUser.update(
         {
           isActive: false,

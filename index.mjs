@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 app.use(cors({
   // credentials true allow cookies to be sent over CORS
   credentials: true,
-  // reflect the requested origin name in the CORS response
+  // reflect in the CORS response header, the origin name where the request came from
   // i.e. in the Access-Control-Allow-Origin header in the response
   origin: true,
 }));
